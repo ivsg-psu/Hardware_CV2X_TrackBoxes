@@ -109,184 +109,50 @@ This "Laps" code assists in breaking recorded path data into paths by defining s
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
 
-### Installation
-
-1. Make sure to run MATLAB 2020b or higher. Why? The "digitspattern" command used in the DebugTools utilities was released late 2020 and this is used heavily in the Debug routines. If debugging is shut off, then earlier MATLAB versions will likely work, and this has been tested back to 2018 releases.
-
-2. Clone the repo
-
-   ```sh
-   git clone https://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps
-   ```
-
-3. Run the main code in the root of the folder (script_demo_Laps.m), this will download the required utilities for this code, unzip the zip files into a Utilities folder (.\Utilities), and update the MATLAB path to include the Utility locations. This install process will only occur the first time. Note: to force the install to occur again, delete the Utilities directory and clear all global variables in MATLAB (type: "clear global *").
-4. Confirm it works! Run script_demo_Laps. If the code works, the script should run without errors. This script produces numerous example images such as those in this README file.
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-<!-- STRUCTURE OF THE REPO -->
-### Directories
-
-The following are the top level directories within the repository:
-<ul>
- <li>/Documents folder: Descriptions of the functionality and usage of the various MATLAB functions and scripts in the repository.</li>
- <li>/Functions folder: The majority of the code for the point and patch association functionalities are implemented in this directory. All functions as well as test scripts are provided.</li>
- <li>/Utilities folder: Dependencies that are utilized but not implemented in this repository are placed in the Utilities directory. These can be single files but are most often folders containing other cloned repositories.</li>
-</ul>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-### Dependencies
-
-* [Errata_Tutorials_DebugTools](https://github.com/ivsg-psu/Errata_Tutorials_DebugTools) - The DebugTools repo is used for the initial automated folder setup, and for input checking and general debugging calls within subfunctions. The repo can be found at: <https://github.com/ivsg-psu/Errata_Tutorials_DebugTools>
-
-* [PathPlanning_PathTools_PathClassLibrary](https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary) - the PathClassLibrary contains tools used to find intersections of the data with particular line segments, which is used to find start/end/excursion locations in the functions. The repo can be found at: <https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary>
-
-    Each should be installed in a folder called "Utilities" under the root folder, namely ./Utilities/DebugTools/ , ./Utilities/PathClassLibrary/ . If you wish to put these codes in different directories, the main call stack in script_demo_(reponame) can be easily modified with strings specifying the different location, but the user will have to make these edits directly.
-
-    For ease of getting started, the zip files of the directories used - without the .git repo information, to keep them small - are included in this repo.
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-<!-- FUNCTION DEFINITIONS -->
-## Functions
-
-### Basic Support Functions
-
-#### fcn_Laps_plotLapsXY
-
-The function fcn_Laps_plotLapsXY plots the laps. For example, the function was used to make the plot below of the last Sample laps.
-<pre align="center">
-  <img src=".\Images\fcn_Laps_plotLapsXY.png" alt="fcn_Laps_plotLapsXY picture" width="400" height="300">
-  <figcaption>Fig.1 - The function fcn_Laps_plotLapsXY plots the lap outputs.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-#### fcn_Laps_fillSampleLaps
-
-The function fcn_Laps_fillSampleLaps creates dummy data to test lap functions. The test laps are in general difficult situations, including scenarios where laps loop back onto themself and/or with separate looping structures. These challenges show that the library can work on varying and complicated data sets. NOTE: within this function, commented out typically, there is code to allow users to draw their own lap test cases.
+### Pole Status
 
 <pre align="center">
-  <img src=".\Images\fcn_Laps_fillSampleLaps.png" alt="fcn_Laps_fillSampleLaps picture" width="400" height="300">
-  <figcaption>Fig.2 - The function fcn_Laps_fillSampleLaps creates test data sets for exercising lap functions.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
+  <img src=".\Images\Pole_Status.jpg" alt="Pole Status" width="720" height="440">
+<figcaption> Pole Status </figcaption>
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+The RSU ID is corresponding to the numbered RSUs in the <a href="### Serial Numbers of RSUs:"> Serial Numbers of RSUs</a> section.
+
+<a href="#hardware_cv2x_commsignia">Back to top</a>
 
 ***
 
-#### fcn_Laps_plotZoneDefinition
-
-The function fcn_Laps_plotZoneDefinition plots any type of zone, allowing user-defined colors. For example, the figure below shows a radial zone for the start, and a line segment for the end. For the line segment, an arrow is given that indicates which direction the segment must be crossed in order for the condition to be counted.
+### Purchasing
 
 <pre align="center">
-  <img src=".\Images\fcn_Laps_plotZoneDefinition.png" alt="fcn_Laps_plotZoneDefinition picture" width="400" height="300">
-  <figcaption>Fig.3 - The function fcn_Laps_plotZoneDefinition plots the zone definitions.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
+1.
+  <img src=".\Images\Lightning_Protection_Package_1.JPG" alt="Lightning_Protection_Package_1" width="720" height="960">
+<figcaption>Lightning Protection Package and Cabinet Status Monitoring 1</figcaption>
+
+2.
+  <img src=".\Images\Lightning_Protection_Package_2.JPG" alt="Lightning_Protection_Package_2" width="720" height="960">
+<figcaption>Lightning Protection Package and Cabinet Status Monitoring 2</figcaption>
 </pre>
 
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
+The following items are in the lightning protection and cabinet status monitoring packages:
+
+| Item | Quantity |
+|-----------------------------------------------|---|
+| 1"*25' PVC Conduit | 6 |
+| Copper Lightning Rod Kit (Without Ground Rod) | 4 |
+| Arduino Uno | 6 |
+| 1" Conduit Strap| 50 |
+| Magnetic Reed Switch MC-32 | 12 |
+| Robot 5MM LDR Photosensitive Sensor | 20 |
+| DHT22 Temperature and Humidity Sensor | 12 |
+| Water sensor detector | 10 |
+| LED night lights (Dusk to Dawn Sensor) | 12 |
+
+<a href="#hardware_cv2x_commsignia">Back to top</a>
 
 ***
 
-#### fcn_Laps_plotSegmentZoneDefinition
-
-The function fcn_Laps_plotSegmentZoneDefinition plots a segment zone, allowing user-defined colors. This function is mostly used to support fcn_Laps_plotZoneDefinition.m.
-
-<!--pre align="center">
-  <img src=".\Images\fcn_Laps_plotZoneDefinition.png" alt="fcn_Laps_plotZoneDefinition picture" width="400" height="300">
-  <figcaption>Fig.3 - The function fcn_Laps_plotZoneDefinition plots the zone definitions.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font>
-</pre -->
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-### Core Functions
-
-#### fcn_Laps_breakDataIntoLaps
-
-The function fcn_Laps_breakDataIntoLaps is the core function for this repo that breaks data into laps. Note: the example shown below uses radial zone definitions, and the results illustrate how a lap, when it is within a start zone, starts at the FIRST point within a start zone. Similarly, each lap ends at the LAST point before exiting the end zone definition. The input data is a traversal type for this particular function.
-
-<pre align="center">
-  <img src=".\Images\fcn_Laps_breakDataIntoLaps.png" alt="fcn_Laps_breakDataIntoLaps picture" width="400" height="300">
-  <figcaption>Fig.4 - The function fcn_Laps_breakDataIntoLaps is the core function in the repo, and breaks data into laps.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-#### fcn_Laps_checkZoneType
-
-The function fcn_Laps_checkZoneType supports fcn_Laps_breakDataIntoLaps by checking if the zone definition inputs are either a point or line segment zone specification.
-
-<!--pre align="center">
-  <img src=".\Images\fcn_Laps_breakDataIntoLaps.png" alt="fcn_Laps_breakDataIntoLaps picture" width="400" height="300">
-  <figcaption>Fig.5 - The function fcn_Laps_checkZoneType checks inputs to determine if zones are point or line segment type.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font>
-</pre-->
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-#### fcn_Laps_breakDataIntoLapIndices
-
-The function fcn_Laps_breakDataIntoLapIndices is a more advanced version of fcn_Laps_breakDataIntoLaps, where the outputs are the indices that apply to each lap. The input type is also easier to use, a "path" type which is just an array of [X Y]. The example here shows the use of a segment type zone for the start zone, a point-radius type zone for the end zone. The results of this function are the row indices of the data. The plot below illustrates that the function returns 3 laps in this example, and as well returns the pre-lap and post-lap data. One can observe that it is common that the prelap data for one lap (Lap 2) consists of the post-lap data for the prior lap (Lap 1).
-
-<pre align="center">
-  <img src=".\Images\fcn_Laps_breakDataIntoLapIndices.png" alt="fcn_Laps_breakDataIntoLapIndices picture" width="600" height="300">
-  <figcaption>Fig.5 - The function fcn_Laps_breakDataIntoLapIndices is a more advanced version of fcn_Laps_breakDataIntoLaps, where the outputs are the indices that apply to each lap.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-#### fcn_Laps_findSegmentZoneStartStop
-
-The function fcn_Laps_findSegmentZoneStartStop is a supporting function that finds the portions of a path that meet a segment zone criteria, returning the starting/ending indices for every crossing of a segment zone. The crossing must cross in the correct direction, and a segment is considered crossed if either the start or end of segment lie on the segment line. This is illustrated in the challenging example shown below, where the input path (thin blue) starts at the top, and then zig-zags repeatedly over a segment definition (green). For each time the blue line crosses the line segment, that portion of the path is saved as a separate possible crossing and thus, for this example, there are 5 possible crossings.
-
-<pre align="center">
-  <img src=".\Images\fcn_Laps_findSegmentZoneStartStop.png" alt="fcn_Laps_findSegmentZoneStartStop picture" width="400" height="300">
-  <figcaption>Fig.5 - The function fcn_Laps_findSegmentZoneStartStop is a supporting function that finds the portions of a path that meet a segment zone criteria, returning the starting/ending indices for every crossing of a segment zone.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
-
-#### fcn_Laps_findPointZoneStartStopAndMinimum
-
-The function fcn_Laps_findPointZoneStartStopAndMinimum is a supporting function that finds the portions of a path that meet a point zone criteria, returning the starting/ending indices for every crossing of a point zone. Note that a minimum number of points must be within the zone for it to be considered activated, which is useful for real-world data (such as GPS recordings) where noise may randomly push one point of a path randomly into a zone, and then jump out. This number of points threshold can be user-defined. In the example below, the threshold is 4 points and one can see that, for a path that crosses over the zone three times, that two of the crossings are found to meet the 4-point criteria.
-
-<pre align="center">
-  <img src=".\Images\fcn_Laps_findPointZoneStartStopAndMinimum.png" alt="fcn_Laps_findPointZoneStartStopAndMinimum picture" width="400" height="300">
-  <figcaption>Fig.6 - The function fcn_Laps_findPointZoneStartStopAndMinimum is a supporting function that finds the portions of a path that meet a point zone criteria, returning the starting/ending indices for every crossing of a point zone.</figcaption>
-  <!--font size="-2">Photo by <a href="https://unsplash.com/ko/@samuelchenard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Chenard</a> on <a href="https://unsplash.com/photos/Bdc8uzY9EPw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></font -->
-</pre>
-
-<a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
-
-***
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -390,7 +256,7 @@ This code is still in development (alpha testing)
 
 Sean Brennan - [sbrennan@psu.edu](sbrennan@psu.edu)
 
-Project Link: [hhttps://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps](https://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps)
+Project Link: [https://github.com/ivsg-psu/Hardware_CV2X_TrackBoxes](https://github.com/ivsg-psu/Hardware_CV2X_TrackBoxes)
 
 <a href="#featureextraction_dataclean_breakdataintolaps">Back to top</a>
 
